@@ -1,6 +1,6 @@
 services:
   vpn:
-    image: openvpn-client
+    image: registry.home.local/openvpn-client:v0.0.1
     # build: .
     container_name: openvpn-client
     cap_add:

@@ -6,8 +6,15 @@
 https://github.com/sshuttle/sshuttle
 ```
 ### Сборка
+#### DOCKER
 ```shell
-docker build --network host -t openvpn-client build
+docker build  --platform linux/arm64 --network host -t registry.home.local/openvpn-client:v0.0.1-arm64 build
+docker build  --platform linux/amd64 --network host -t registry.home.local/openvpn-client:v0.0.1-amd64 build
+docker manifest create registry.home.local/openvpn-client:v0.0.1 --amend registry.home.local/openvpn-client:v0.0.1-arm64  --amend registry.home.local/openvpn-client:v0.0.1-amd64
+```
+#### PODMAN
+```shell
+ sudo podman-remote build --log-level debug --platform linux/arm64/v8 --platform linux/amd64 --manifest quay.io/myuser/test .
 ```
 ### Настройка параметров
 Скопировать файл конфигурации config.ovpn в каталог ovpn.<br> 
