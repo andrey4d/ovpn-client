@@ -1,7 +1,6 @@
 services:
   vpn:
-    image: registry.home.local/openvpn-client:v0.0.1
-    # build: .
+    image: openvpn-client
     container_name: openvpn-client
     cap_add:
     - NET_ADMIN
@@ -19,7 +18,6 @@ services:
     volumes:
       - ./ovpn:/data/vpn
       - ~/.ssh:/home/ovpn/.ssh # <-- ssh keys
-      
     ports:
     - "1080:1080"
     - "8088:8080"
