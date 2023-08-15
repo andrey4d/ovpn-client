@@ -50,9 +50,9 @@ services:
       - ~/.ssh:/home/ovpn/.ssh
       
     ports:
-    - 1080:1080 # <--SOCKS5
-    - 8088:8080 # <--HTTP_PROXY
-    - 2222:22   # <--SSH
+    - "1080:1080" # <--SOCKS5
+    - "8088:8080" # <--HTTP_PROXY
+    - "2222:22"   # <--SSH
 
 ```
 ### Подключение по ssh
@@ -69,12 +69,12 @@ Host barrier
   StrictHostKeyChecking no
   LogLevel ERROR
   
-Host gitlab.veil.local
+Host gitlab.home.local
   IdentitiesOnly yes
   ProxyJump barrier
   Port 2022
 
-Host *.veil.local
+Host *.home.local
   IdentitiesOnly yes
   ProxyJump barrier
  
