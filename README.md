@@ -7,14 +7,15 @@ https://github.com/sshuttle/sshuttle
 ```
 ### Сборка
 #### DOCKER
+docker build  --platform linux/arm64 --network host -t registry.home.local/openvpn-client:v0.0.1-arm64 build <br>
+docker build  --platform linux/amd64 --network host -t registry.home.local/openvpn-client:v0.0.1-amd64 build <br>
+docker manifest create registry.home.local/openvpn-client:v0.0.1 --amend registry.home.local/openvpn-client:v0.0.1-arm64  --amend registry. home.local/openvpn-client:v0.0.1-amd64 <br>
 ```shell
-docker build  --platform linux/arm64 --network host -t registry.home.local/openvpn-client:v0.0.1-arm64 build
-docker build  --platform linux/amd64 --network host -t registry.home.local/openvpn-client:v0.0.1-amd64 build
-docker manifest create registry.home.local/openvpn-client:v0.0.1 --amend registry.home.local/openvpn-client:v0.0.1-arm64  --amend registry.home.local/openvpn-client:v0.0.1-amd64
+./build.sh
 ```
 #### PODMAN
 ```shell
- sudo podman-remote build --log-level debug --platform linux/arm64/v8 --platform linux/amd64 --manifest quay.io/myuser/test .
+podman-remote build --log-level debug --platform linux/arm64 --platform linux/amd64 --manifest registry.home.local/openvpn-client:v0.0.1 .
 ```
 ### Настройка параметров
 Скопировать файл конфигурации config.ovpn в каталог ovpn.<br> 
@@ -57,9 +58,9 @@ services:
       - ~/.ssh:/home/ovpn/.ssh
       
     ports:
-    - 1080:1080 # <--SOCKS5
-    - 8088:8080 # <--HTTP_PROXY
-    - 2222:22   # <--SSH
+    - "1080:1080" # <--SOCKS5
+    - "8088:8080" # <--HTTP_PROXY
+    - "2222:22"   # <--SSH
 
 ```
 ### Подключение по ssh
@@ -76,12 +77,12 @@ Host barrier
   StrictHostKeyChecking no
   LogLevel ERROR
   
-Host gitlab.veil.local
+Host gitlab.home.local
   IdentitiesOnly yes
   ProxyJump barrier
   Port 2022
 
-Host *.veil.local
+Host *.home.local
   IdentitiesOnly yes
   ProxyJump barrier
  
