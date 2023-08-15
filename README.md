@@ -7,12 +7,13 @@ https://github.com/sshuttle/sshuttle
 ```
 ### Сборка
 #### DOCKER
-docker build  --platform linux/arm64 --network host -t registry.home.local/openvpn-client:v0.0.1-arm64 build <br>
-docker build  --platform linux/amd64 --network host -t registry.home.local/openvpn-client:v0.0.1-amd64 build <br>
-docker manifest create registry.home.local/openvpn-client:v0.0.1 --amend registry.home.local/openvpn-client:v0.0.1-arm64  --amend registry. home.local/openvpn-client:v0.0.1-amd64 <br>
 ```shell
 ./build.sh
 ```
+##### For info:
+  docker build  --platform linux/arm64 --network host -t registry.home.local/openvpn-client:v0.0.1-arm64 build <br>
+  docker build  --platform linux/amd64 --network host -t registry.home.local/openvpn-client:v0.0.1-amd64 build <br>
+  docker manifest create registry.home.local/openvpn-client:v0.0.1 --amend registry.home.local/openvpn-client:v0.0.1-arm64  --amend registry. home.local/openvpn-client:v0.0.1-amd64 <br>
 #### PODMAN
 ```shell
 podman-remote build --log-level debug --platform linux/arm64 --platform linux/amd64 --manifest registry.home.local/openvpn-client:v0.0.1 .
@@ -85,5 +86,4 @@ Host gitlab.home.local
 Host *.home.local
   IdentitiesOnly yes
   ProxyJump barrier
- 
 ```
