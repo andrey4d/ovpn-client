@@ -30,7 +30,6 @@ docker-compose up -d
 services:
   vpn:
     image: openvpn-client
-    # build: .
     container_name: openvpn-client
     cap_add:
     - NET_ADMIN
